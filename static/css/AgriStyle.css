@@ -1,0 +1,270 @@
+*{
+    margin:10px;
+    padding:1px;
+}
+html, body {
+    scroll-behavior: smooth;
+}
+
+body {
+    background-size: cover;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-position: center center;
+    font-family: Arial, sans-serif;
+    color:black;
+    margin:0px;
+    background-image: url('agri_img.jpg');
+}
+
+body h1{
+    color:black;
+    text-align:center
+    }
+form{
+    border: 3px solid black;
+    border-radius: 4px;
+    font-size: 22px;
+    background-image: url('agri_img.jpg');
+    background-repeat: no-repeat;
+    padding: 25px;
+    margin: 28px;
+}
+label,input,select{
+ width:30%;
+ padding:10px;
+ margin:10px;
+ border-radius:20px;
+ font-size:18px;
+ margin-top:50px;
+ background: #BE93C5;
+ background: -webkit-linear-gradient(to right, #7BC6CC, #BE93C5);
+ background: linear-gradient(to right, #7BC6CC, #BE93C5);
+}
+input[type="submit"]{
+    background:white;
+    width:100%;
+    font-size:22px;
+    padding:15px;
+    margin:10px;
+}
+input[type="number"]{
+background:white;
+width:73%;
+padding:15px;
+margin:10px;
+}
+.button-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+.predictButton{
+        background: #BE93C5;
+        font-size: 22px;
+        padding: 15px;
+        border-radius:5px;
+        border: none;
+        border:2px solid black;
+        color: black;
+        flex: 1;
+        text-align: center;
+        margin: 5px;
+    }
+.cart{
+font-size:22px;
+}
+.card{
+background:rgba(255, 255, 255, 0.8); ;
+border:1px solid black;
+display: inline-block;
+border-radius:5px;
+justify-content: center;
+align-items: center;
+text-align: center;
+}
+.card img{
+background:rgba(255, 255, 255, 0.8); ;
+width: 200px;
+height: 200px;
+border: 2px solid #333;
+border-radius: 50%; /* Set border-radius to 50% for a circular image */
+object-fit: cover; /* Ensure the image covers the circular area */
+}
+.card p{
+text-align:center;
+}
+.price_diff_low{
+color:white;
+border:1px solid green;
+border-radius:10px;
+text-align:center;
+padding:10px;
+background:green;
+}
+.price_diff_high{
+color:white;
+border:1px solid red;
+border-radius:10px;
+text-align:center;
+padding:10px;
+background:red;
+}
+.user_brand_img{
+background:white;
+width:200px;
+height:200px;
+border:1px solid white;
+border-radius:30px;
+}
+.cart_user {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px;
+}
+
+.card_user {
+    display: flex;
+    align-items: center;
+    padding: 30px;
+    border: 1px solid black; /* Black border */
+    background-color: rgba(255, 255, 255, 0.8); ; /* White background */
+    border-radius: 5px;
+}
+.brandname{
+    font-size:20px;
+    font-weight:bold;
+    font-size: 24px;
+    border: 1px solid black;
+    color:black;
+    background: #BE93C5;
+    background: -webkit-linear-gradient(to right, #7BC6CC, #BE93C5);
+    background: linear-gradient(to right, #7BC6CC, #BE93C5);
+    border-radius:5px;
+    padding:10px;
+}
+.center-text {
+    text-align: center;
+}
+.user_brand_img {
+    margin-right: 20px;
+    width:200px;
+    height:200px;
+    border: 2px solid black;
+    padding:20px;
+}
+
+.user_brand_info {
+    flex: 2;
+}
+
+.prediction_price {
+    font-size: 24px;
+    font-weight: bold;
+    border: 1px solid black;
+    color:yellow;
+    background:green;
+    border-radius:15px;
+    padding:10px;
+}
+.prod_price{
+background:black;
+color:white;
+padding:10px;
+border-radius:150px;
+font-weight:700;
+}
+#commodity.options option {
+  width: 200px;
+  color: black; /* Text color for options */
+  padding: 10px; /* Padding around options */
+  font-size: 15px;
+}
+
+#brand_name.options option {
+  width: 200px;
+  color: black; /* Text color for options */
+  padding: 10px; /* Padding around options */
+  font-size: 15px;
+}
+.reportButton {
+        background-color: transparent; /* Transparent background */
+        color: black;
+        border: 1px solid black; /* Border around the text */
+        padding: 0; /* Remove padding */
+        text-align: center;
+        display: inline-block;
+        padding: 5px 10px;
+}
+.report_session{
+width:95%;
+background:rgba(255, 255, 255, 0.8);
+font-size:20px;
+padding:0px;
+}
+.report_session th{
+padding:20px;
+}
+.report_session td{
+padding:4px;
+}
+
+.text_content a {
+  font-family:"Times New Roman", sans-serif;
+  font-size: 23px;
+  text-decoration: none;
+  border-radius: 5px;
+  margin: 5px;
+  padding: 5px 10px;
+  color:#B92B27;
+  font-weight:bold;
+  position: relative;
+ }
+
+.bg-nav a::after {
+  content: "";
+  display: block;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 2px;
+  background-color: #B92B27;
+  transform: scaleX(0);
+  transform-origin: center;
+  transition: transform 0.3s ease-in-out;
+}
+.bg-nav a:hover::after {
+  transform: scaleX(1);
+}
+
+.btn_log {
+  color:#1D2671;
+  font-size: 22px;
+  text-decoration: none;
+  border-radius: 10px;
+  margin: 5px;
+  padding: 10px 15px;
+  font-weight:bold;
+  background-color: white;
+  border:2px solid black;
+}
+.btn_log:hover{
+    background-color:#1D2671;
+    color:white;
+}
+
+.reportButton {
+  /* Your existing button styles */
+  background-color: #YourButtonColor; /* Set your desired button color */
+  /* Other button styles */
+
+  /* Transition for smooth color change */
+  transition: background-color 0.3s ease;
+}
+
+.reportButton:hover {
+  background-color: transparent; /* Change to transparent on hover */
+}
+

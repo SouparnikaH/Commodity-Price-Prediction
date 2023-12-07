@@ -1,0 +1,42 @@
+.bg-nav{
+background: #BE93C5;
+background: -webkit-linear-gradient(to right, #7BC6CC, #BE93C5);
+background: linear-gradient(to right, #7BC6CC, #BE93C5);
+}
+.mt-13{
+ margin-top:100px;
+}
+
+.container h1 {
+  font-weight: bold;
+  font-size: 2.5rem;
+  color: #333;
+  margin-bottom: 10px;
+  text-align: left;
+  background: -webkit-linear-gradient(#B92B27,#1565C0);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.container{
+  background-color: rgba(255, 255, 255, 0.5);
+  padding: 10px;
+  margin: 10px;
+  border-radius: 10px;
+}
+.logButton{
+border: 2px solid white;
+background:white;
+border-radius: 10px;
+padding:5px;
+padding-left:30px;
+padding-right:30px;
+margin:0.1px;
+margin-right:10px;
+}
+.logButton:hover{
+    border: 2px solid #93A5CF;
+    color:white;
+    font-weight:bold;
+    font-size:18px;
+    background:#9452A5;
+}

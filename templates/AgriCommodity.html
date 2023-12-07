@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='css/AgriStyle.css')}}">
+    <title>Commodity Price Prediction</title>
+</head>
+<body>
+    <div class="bg-nav d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3">
+        <a class="btn_log" href="/logout">LogOut</a>
+    </div>
+    <h1>Commodity Price Prediction</h1>
+    <form method="POST" action="/Agripredict" id="predictionForm">
+        <label for="commodity">Commodity:</label>
+        <select class="options" id="commodity" name="commodity" required>
+            <option class="option_style" value="Select Commodity">Select Commodity</option>
+            <option value="Ghee">Ghee</option>
+            <option value="Rice">Rice</option>
+            <option value="Tea">Tea</option>
+            <option value="Coffee">Coffee</option>
+            <option value="Wheat">Wheat</option>
+            <option value="Potato">Potato</option>
+            <option value="Apple">Apple</option>
+            <option value="Coconut Oil">Coconut Oil</option>
+            <option value="Millet">Millet</option>
+            <option value="Coco">Coco</option>
+
+        </select>
+
+        <label for="brand_name">Brand Name:</label>
+        <select class="options" id="brand_name" name="brand_name" required>
+            <option value="" disabled selected>Select Brand Name</option>
+        </select><br><br>
+
+        <label for="quantity">Quantity (g):</label>
+        <input type="number" id="quantity" name="quantity" step="0.01" required><br><br>
+
+        {% if commodity %}
+        <script>
+            document.getElementById("commodity").value = "{{commodity}}";
+        </script>
+        {% endif %}
+
+        {% if brand_name %}
+        <script>
+            document.getElementById("brand_name").value = "{{brand_name}}";
+        </script>
+        {% endif %}
+
+        {% if quantity %}
+        <script>
+            document.getElementById("quantity").value = "{{quantity}}";
+        </script>
+        {% endif %}
+
+        <div>
+            <input class="predictButton" type="submit" value="Predict" id="predictButton" form="predictionForm" formaction="/Agripredict#predicted_price_section">
+            <input class="reportButton" type="submit" value="Generate Report" id="reportButton" form="predictionForm" formmethod="POST" formaction="/GenerateReport#report_section">
+        </div>
+
+    </form>
+
+    <section id="predicted_price_section">
+        {% if prediction %}
+            <div class="card_user">
+                <h2>Predicted Price:</h2>
+                <img class="user_brand_img" src="{{image_url_img}}">
+                <div class="center-text">
+                    <h2 class="brandname">  Name : {{commodity }}</h2>
+                    <p class="prediction_price">  Price : {{ prediction }} Rs</p>
+                    <p class="brandname">Brand Name : {{brand_name}}</p>
+                </div>
+            </div>
+        {% endif %}
+
+   {% if lower_price_brands %}
+        <div class="cart">
+            <h2>Brands with Lower Prices:</h2>
+            {% for brand in lower_price_brands %}
+            <div class="card">
+                <p>Brand: {{ brand[0] }}</p>
+                <p>Quantity: {{ brand[1] }} g</p>
+                <p class="prod_price">Amount: {{ brand[2] }} Rs</p>
+                <img src="{{ brand[3] }}" alt="{{ brand[0] }}">
+                <p class="price_diff_low">price : {{brand[4]}}</p>
+            </div>
+            {% endfor %}
+        </div>
+        {% else %} 
+    {% endif %}
+
+    {% if higher_price_brands %}
+        <div class="cart">
+            <h2>Brands with Higher Prices:</h2>
+            {% for brand in higher_price_brands %}
+            <div class="card">
+                <p>Brand: {{ brand[0] }}</p>
+                <p>Quantity: {{ brand[1] }} g</p>
+                <p class="prod_price">Amount: {{ brand[2] }} Rs</p>
+                <img src="{{ brand[3] }}" alt="{{ brand[0] }}">
+                <p class="price_diff_high">price : + {{brand[4]}}</p>
+            </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+    </section>
+
+    <section id="report_section" class="report_session">
+        {% if brand_quantities %}
+            <h2>Sale Report for {{commodity}}</h2>
+                <table border="2" style="margin: 0 auto;">
+                    <tr style="color:blue">
+                        <th>Brand Name</th>
+                        <th>Available Quantities</th>
+                        <th>Total Sale</th>
+                        <th>Quantity Sold High</th>
+                    </tr>
+                    {% for brand, quantities in brand_quantities.items() %}
+                    <tr>
+                        <td>{{ brand }}</td>
+                        <td>{{ quantities['Unique_Quantities']|join(', ') }}</td>
+                        <td style="text-align:center">{{ quantities['Total_Count'] }}</td>
+                        <td style="text-align:center">
+                            [ {{ quantities['quantity_max_count'] }}g ] - {{ quantities['quantity_sold_high'] }}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </table>
+            <h3>Bar Chart: Highest Total Count by Brand</h3>
+                <div style="margin: 0 auto;">
+                    <img src="{{ url_for('static', filename='total_count_chart.png') }}" alt="Bar Chart" width="1100px" height="600" />
+                </div>
+        {% else %}
+        <p style="background:white;"></p>
+        {% endif %}
+    </section>
+
+    <script>
+        var commodityToBrands = {
+            "Select Commodity":["Select Brand Name"],
+            "Ghee": ["Select Brand Name","Amul Ghee", "Patanjali Ghee", "Gowardhan Ghee","Anik Ghee","Sagar Ghee","Kwality Ghee","Mother Dairy Ghee","Nandini Ghee","Verka Ghee"],
+            "Potato": ["Select Brand Name","Organic", "Un Organic","Un Organic-Farm foods","Organic-Mr. Herbs","Un Organic-The Veg Box"],
+            "Apple": ["Select Brand Name","Organic--Mr. Herbs", "Un Organic-urban_farms","Organic-urban_farms","Un Organic-Farm_foods"],
+            "Tea":["Select Brand Name","Tata Tea","Lipton","Twinings","Vahdam Teas","Teabox","Udyan Tea","Saffron Cup","Typhoo"],
+            "Coffee":["Select Brand Name","Nescafe","Bru Coffee","Tata Coffee","Davidoff Coffee","Devans Coffee","Seven Beans Coffee"],
+            "Wheat":["Select Brand Name","Patanjali Wheat Atta","Ahaar Chakki Atta","Swad Sharbati Atta","Shakti Bhog Atta","Annapurna Atta","Aashirvaad Atta"],
+            "Coconut Oil":["Select Brand Name","Parachute Coconut Oil","Mara Chekku Coconut Oil","Patanjali Coconut Oil","Dabur Vatika Oil"],
+            "Millet":["Select Brand Name","Organic Tattva","24 Mantra Organic","Kaulige Foods","Organic India","Pro Nature"],
+            "Coco":["Select Brand Name","Cocoa Powder","Dark Chocolate Bars","Milk Chocolate Bars","Hot Chocolate Mix","Cocoa Beans"],
+            "Rice":["Organic Tattva","Double Horse","Tilda","Kohinoor Royale","Daawat","India Gate_Regular","India Gate_Tibar","Daawat Rozana Super","Charminar"],
+        };
+
+        function updateBrandDropdown() {
+            var commodityDropdown = document.getElementById("commodity");
+            var brandDropdown = document.getElementById("brand_name");
+
+            var selectedCommodity = commodityDropdown.value;
+            brandDropdown.innerHTML = "";
+
+            var brands = commodityToBrands[selectedCommodity] || [];
+            for (var i = 0; i < brands.length; i++) {
+                var option = document.createElement("option");
+                option.text = brands[i];
+                brandDropdown.add(option);
+            }
+        }
+        var commodity = "{{commodity}}";
+        var brand_name = "{{brand_name}}";
+        document.getElementById("commodity").addEventListener("change", updateBrandDropdown);
+        updateBrandDropdown();
+        document.getElementById("brand_name").value = brand_name;
+
+    </script>
+</body>
+</html>
